@@ -4,7 +4,7 @@ var commands = {
 
 	client.on("chat", function(channel, user, message, self) {
 		if(message === ";gearbox") {
-			client.say(channel, "GachiPls GEARBOX"  );
+			client.say(channel, ("GachiPls GEARBOX"));
 		}
 			
 	})
@@ -52,7 +52,7 @@ var commands = {
 	})
 	client.on("chat", function(channel, user, message, self) {
 		if(message === ";dank" + message) {
-
+			client.say(channel, ("BOOM YOU JUST GOT DANKED FeelsDankMan"));
 
 		}
 	})
