@@ -31,6 +31,10 @@ client.connect();
 //const commands = require('./botmodules/commands.js')
 //const commands1 = require('./botmodules/commands1.js')
 
+client.on("notice", function(channel, msgid, message) {
+})
+	
+
 client.on("chat", function(channel, user, message, self) {
 		if(message === ";gearbox") {
 			client.say(channel, ("GachiPls GEARBOX"));
@@ -85,5 +89,18 @@ client.on("chat", function(channel, user, message, self) {
 
 		}
 	})
+	
+	client.on("chat", function(channel, user, message, self) {
+		if(message === ";supinic") {
+			client.say(channel, ("Fix it Supinic BabyRage"));
+		}
+			
+	})
 
+	client.on("chat", function(channel, user, message, self) {
+		if(message === ";eval " + function(eval) ) {
+			client.say(channel, (user['display-name'] + " , " + "WutFace can't do it" ));
+		}
+			
+	})
 
