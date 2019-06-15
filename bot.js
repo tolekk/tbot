@@ -18,7 +18,7 @@ var client = new tmi.client(config.options);
 let lastMessage = null;
     function sendMsg(channel, message){
         if (message === lastMessage) {
-            message = message + " ";
+            message = message + "\u{E0000}";
         }
 			lastMessage = message;
 			return message;
@@ -95,12 +95,20 @@ client.on("chat", function(channel, user, message, self) {
 			client.say(channel, ("Fix it Supinic BabyRage"));
 		}
 			
-	})
-
-	client.on("chat", function(channel, user, message, self) {
-		if(message === ";eval " + function(eval) ) {
-			client.say(channel, (user['display-name'] + " , " + "WutFace can't do it" ));
+	client.on("subscription", function(channel, username) {
+	    client.say(channel, ("!join FeelsGoodMan Clap"));
 		}
+	)
+
+	
+	client.on("timeout", function(Supinic, username, reason, duration) {
+  	 	client.say(channel, ("You just got WAYTOODANK 'ed " + user['display-name'] ));
+		}
+	)
+//	client.on("chat", function(channel, user, message, self) {
+//		if(message === ";eval " + function(eval) ) {
+//			client.say(channel, (user['display-name'] + " , " + "WutFace can't do it" ));
+//		}
 			
 	})
 
