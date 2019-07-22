@@ -1,4 +1,2 @@
 # tbot
-My first twitch bot. Written in js
-
-Idk what am i doing
+A bot LOOOOL 4HEad
