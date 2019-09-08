@@ -79,14 +79,21 @@ client.on("join", function(channel, user, username, self) {
 
 //SMACZNY TEST, TUCK-UNTUCK MODULE
 client.on("chat", function(channel, user, message, self) {
-	if(message.startsWith(";test")) {
-		sendMsg("smaczny", "test successful KKona");
-	}  else if(message.startsWith(";tuck ")) {
+	 	if(message.startsWith(";tuck ")) {
 		sendMsg(channel, user["display-name"] + " tucks " + message.substr(6) + " into bed FeelsOkayMan 👉 🛏 💤 " );
 	}
 		else if(message.startsWith(";untuck ")) {
 		sendMsg(channel, user["display-name"] + " untucks " + message.substr(7) + " from their bed DansGame 👉 🛏 ❗  " );
 	}
+})
+
+client.on("chat", function(channel, user, message, self) {
+    if (channel !== "#smaczny") return;
+    if (self) return;
+ 
+    if(message.startsWith(";test")) {
+        sendMsg("smaczny", "test successful KKona");
+    }
 })
 
 // SUB REACTION MODULE
@@ -106,18 +113,26 @@ client.on("resub", (channel, username, months, message, userstate, methods) => {
 	client.say(channel, ("RESUB PogChamp "));
 })
 
-//client.on("subscription", function("smaczny", username) {
-//	client.say("smaczny", ("!raffle 2500"));	
-//})
-//
-//client.on("subgift", ("smaczny", username, streakMonths, recipient, methods, userstate) => {
-//	client.say("smaczny", ("!raffle 3500"));
-//})
-//
-//client.on("submysterygift", ("smaczny", username, numbOfSubs, methods, userstate) => {
-//	client.say("smaczny", ("!raffle 3500"));
-//})
-//
-//client.on("resub", ("smaczny", username, months, message, userstate, methods) => {
-//	client.say("smaczny", ("!raffle 2000"));
-//})
+client.on("subscription", function(channel, username, self) {
+		if (channel !== "#smaczny") return;
+    	if (self) return;
+			sendMsg("smaczny", ("!raffle 2500"));	
+	})
+
+	client.on("subgift", (self, channel, username, streakMonths, recipient, methods, userstate) => {
+		if (channel !== "#smaczny") return;
+		if (self) return;
+			sendMsg("smaczny", ("!raffle 3500"));
+	})
+
+	client.on("submysterygift", (self, channel, username, numbOfSubs, methods, userstate) => {
+		if (channel !== "#smaczny") return;
+		if (self) return;
+			sendMsg("smaczny", ("!raffle 3500"));
+	})
+
+	client.on("resub", (self, channel, username, months, message, userstate, methods) => {
+		if (channel !== "#smaczny") return;
+		if (self) return; 
+			sendMsg("smaczny", ("!raffle 2000"));
+	})
