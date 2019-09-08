@@ -16,19 +16,19 @@ var client = new tmi.client(config.options);
 		
 // Anti-repeated message module
 var lastMessage = null;
-    function sendMsg(channel, message){
-        if (message === lastMessage) {
-            message = message + " \u{E0000} ";
-        }
-			lastMessage = message;
-			client.say(channel, message);
-    }
 
+function sendMsg(channel, message) {
+	if (message === lastMessage) {
+		message += " \u{E0000} ";
+	}
+	
+}
 
 client.connect();
 
 
 client.on("notice", function(channel, msgid, message) {
+	//TODO @tolekk FeelsWeirdMan
 })
 	
 // MAIN COMMANDS MODULE
@@ -71,29 +71,31 @@ client.on("chat", function(channel, user, message, self) {
 // ANTI-SNIPER MODULE
 client.on("join", function(channel, user, username, self) {
 	const snipers = require('./snipers.js')
-    if(snipers.includes(username)) {
-		sendMsg("smaczny", "NaM 👉 🚨 " + user["display-name"]); {
-		} 
+	
+	if (snipers.includes(username)) {
+		sendMsg("smaczny", "NaM 👉 🚨 " + user["display-name"]);
 	}
 })
 
 //SMACZNY TEST, TUCK-UNTUCK MODULE
 client.on("chat", function(channel, user, message, self) {
-	 	if(message.startsWith(";tuck ")) {
+	if (message.startsWith(";tuck ")) {
 		sendMsg(channel, user["display-name"] + " tucks " + message.substr(6) + " into bed FeelsOkayMan 👉 🛏 💤 " );
 	}
-		else if(message.startsWith(";untuck ")) {
+	else if(message.startsWith(";untuck ")) {
 		sendMsg(channel, user["display-name"] + " untucks " + message.substr(7) + " from their bed DansGame 👉 🛏 ❗  " );
 	}
 })
 
 client.on("chat", function(channel, user, message, self) {
-    if (channel !== "#smaczny") return;
-    if (self) return;
+    	if (channel !== "#smaczny") 
+		return;
+    	if (self) 
+		return;
  
-    if(message.startsWith(";test")) {
-        sendMsg("smaczny", "test successful KKona");
-    }
+    	if (message.startsWith(";test")) {
+        	sendMsg("smaczny", "test successful KKona");
+    	}
 })
 
 // SUB REACTION MODULE
@@ -114,25 +116,31 @@ client.on("resub", (channel, username, months, message, userstate, methods) => {
 })
 
 client.on("subscription", function(channel, username, self) {
-		if (channel !== "#smaczny") return;
-    	if (self) return;
-			sendMsg("smaczny", ("!raffle 2500"));	
-	})
+	if (channel !== "#smaczny") 
+		return;
+    	if (self) 
+		return;
+	sendMsg("smaczny", ("!raffle 2500"));	
+})
 
-	client.on("subgift", (self, channel, username, streakMonths, recipient, methods, userstate) => {
-		if (channel !== "#smaczny") return;
-		if (self) return;
-			sendMsg("smaczny", ("!raffle 3500"));
-	})
+client.on("subgift", (self, channel, username, streakMonths, recipient, methods, userstate) => {
+	if (channel !== "#smaczny") return;
+	if (self) return;
+		sendMsg("smaczny", ("!raffle 3500"));
+})
 
-	client.on("submysterygift", (self, channel, username, numbOfSubs, methods, userstate) => {
-		if (channel !== "#smaczny") return;
-		if (self) return;
-			sendMsg("smaczny", ("!raffle 3500"));
-	})
+client.on("submysterygift", (self, channel, username, numbOfSubs, methods, userstate) => {
+	if (channel !== "#smaczny") 
+		return;
+	if (self) 
+		return;
+	sendMsg("smaczny", ("!raffle 3500"));
+})
 
-	client.on("resub", (self, channel, username, months, message, userstate, methods) => {
-		if (channel !== "#smaczny") return;
-		if (self) return; 
-			sendMsg("smaczny", ("!raffle 2000"));
-	})
+client.on("resub", (self, channel, username, months, message, userstate, methods) => {
+	if (channel !== "#smaczny") 
+		return;
+	if (self) 
+		return; 
+	sendMsg("smaczny", ("!raffle 2000"));
+})
