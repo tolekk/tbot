@@ -2,7 +2,7 @@
 // dankchars for copying [" "," "," "," ","　"]
 
 // tmi.js lib required to run the bot
-// change the dir to whatever you wan
+// change the dir to whatever you want
 
 var tmi = require('./tmi/node_modules/tmi.js');
 
@@ -65,7 +65,10 @@ client.on("chat", function(channel, user, message, self) {
 		sendMsg(channel, "Bot created and maintained by tolekk. Message me on Discord at tolekk#6008 if you want to learn more :) Use ;github if you want to see the code.");
 	} else if(message.startsWith(";github")) {
 		sendMsg(channel, "My rarely updated github https://github.com/tolekk/tbot with my Pepega code.");
-	}
+	} else if(message.startsWith(";poop")) {
+		sendMsg(channel, user["display-name"] + " is now pooping 💩 " );
+	} else if(message.includes("your mom")) {
+		sendMsg(channel, user["display-name"] + " forsenHead" );
 })
 
 // ANTI-SNIPER MODULE
