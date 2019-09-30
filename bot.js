@@ -1,5 +1,5 @@
 //tbot0.1, made by ML, 2019
-// dankchars for copying [" "," "," "," ","　"]
+// dankchars for copying [" "," "," "," "," "]
 
 // tmi.js lib required to run the bot
 // change the dir to whatever you want
@@ -89,7 +89,7 @@ client.on("chat", function(channel, user, message, self) {
   else {
     if (message.startsWith("asd")) {
       sendMsg("pajlada", "FeelsDankMan Clap ");
-    } else if(message.toLowerCase().includes("tolekkbot")) {
+    } else if (message.toLowerCase().includes("tolekkbot")) {
       if (message.toLowerCase().includes("ty chuju")) {
         sendMsg(channel, "Spierdalaj " + user["display-name"]);
       }
