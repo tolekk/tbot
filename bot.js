@@ -1,5 +1,5 @@
 //tbot0.1, made by ML, 2019
-// dankchars for copying [" "," "," "," ","　"]
+// dankchars for copying [" "," "," "," "," "]
 
 // tmi.js lib required to run the bot
 // change the dir to whatever you want
@@ -28,54 +28,77 @@ client.on("notice", function(channel, msgid, message) {});
 
 // MAIN COMMANDS MODULE
 client.on("chat", function(channel, user, message, self) {
-  if (message.startsWith(";gearbox")) {
-    sendMsg(channel, "GachiPls GEARBOX");
-  } else if (message.startsWith(";bl3")) {
-    sendMsg(
-      channel,
-      "After 5 years in development, hopefully, it would have been worth the wait GabeN "
-    );
-  } else if (message.startsWith(";ping")) {
-    sendMsg(channel, "Pong FeelsGoodMan ");
-  } else if (message.startsWith(";nam")) {
-    sendMsg(channel, "Don't NaM me " + user["display-name"]);
-  } else if (message.startsWith("@tolekkBOT ty chuju")) {
-    sendMsg(channel, "Spierdalaj " + user["display-name"]);
-  } else if (message.startsWith(";tolekk")) {
-    sendMsg(channel, "Sup " + user["display-name"] + " NaM ");
-  } else if (message.startsWith(";?")) {
-    sendMsg(channel, "❓ ❓ ❓  FeelsDankMan  ❓ ❓ ❓ ");
-  } else if (message.startsWith(";dank ")) {
-    sendMsg(
-      channel,
-      "BOOM YOU JUST GOT DANKED FeelsDankMan " + message.substr(6)
-    );
-  } else if (message.startsWith(";supinic")) {
-    sendMsg(channel, "Fix it Supinic BabyRage");
-  } else if (message.startsWith(";kappa")) {
-    sendMsg(channel, "Chat spam Kappa 123");
-    //} else if(message.includes ("tolekkbot") || message.includes("tolekkBOT")) {
-    //	sendMsg(channel, "Pinged PepeS ");
-  } else if (message.startsWith("asd")) {
-    sendMsg("pajlada", "FeelsDankMan Clap ");
-  } else if (message.startsWith(";test1")) {
-    sendMsg("pajlada", "FeelsDankMan woah ");
-  } else if (message.startsWith(";commands")) {
-    sendMsg(channel, "Command list coming soon KKona");
-  } else if (message.startsWith(";bot")) {
-    sendMsg(
-      channel,
-      "Bot created and maintained by tolekk. Message me on Discord at tolekk#6008 if you want to learn more :) Use ;github if you want to see the code."
-    );
-  } else if (message.startsWith(";github")) {
-    sendMsg(
-      channel,
-      "My rarely updated github https://github.com/tolekk/tbot with my Pepega code."
-    );
-  } else if (message.startsWith(";poop")) {
-    sendMsg(channel, user["display-name"] + " is now pooping 💩 ");
-  } else if (message.includes("your mom")) {
-    sendMsg(channel, user["display-name"] + " forsenHead");
+  //handling commands
+  if (message.startsWith(";")) {
+    // .split() function separates message content from any optional arguments and .slice(1) removes one character from the beginning of a message
+    let command = message.toLowerCase().split(' ')[0].slice(1);
+    switch(command) {
+      case "gearbox":
+        sendMsg(channel, "GachiPls GEARBOX");
+        break;
+      case "bl3":
+        sendMsg(channel, "After 5 years in development, hopefully, it would have been worth the wait GabeN ");
+        break;
+      case "ping":
+        sendMsg(channel, "Pong FeelsGoodMan ");
+        break;
+      case "nam":
+        sendMsg(channel, "Don't NaM me " + user["display-name"]);
+        break;
+      case "tolekk":
+        sendMsg(channel, "Sup " + user["display-name"] + " NaM ");
+        break;
+      case "?":
+        sendMsg(channel, "❓ ❓ ❓  FeelsDankMan  ❓ ❓ ❓ ");
+        break;
+      case "dank":
+        //added a .split(' ')[0] here, so optional extra arguments won't be sent in a response
+        sendMsg(channel, "BOOM YOU JUST GOT DANKED FeelsDankMan " + message.substr(6).split(' ')[0]);
+        break;
+      case "supinic":
+        sendMsg(channel, "Fix it Supinic BabyRage");
+        break;
+      case "kappa":
+        sendMsg(channel, "Chat spam Kappa 123");
+        break;
+      case "test1":
+        sendMsg("pajlada", "FeelsDankMan woah ");
+        break;
+      case "commands":
+        sendMsg(channel, "Command list coming soon KKona");
+        break;
+      case "bot":
+        sendMsg(channel, "Bot created and maintained by tolekk. Message me on Discord at tolekk#6008 if you want to learn more :) Use ;github if you want to see the code.");
+        break;
+      case "github":
+        sendMsg(channel, "My rarely updated github https://github.com/tolekk/tbot with my Pepega code.");
+        break;
+      case "poop":
+        sendMsg(channel, user["display-name"] + " is now pooping 💩 ");
+        break;
+      //SMACZNY TEST, TUCK-UNTUCK MODULE (simplified the format, moved whole thing to lidl command handler)
+      case "tuck":
+        sendMsg(channel, `${user["display-name"]} tucks ${message.substr(6).split(' ')[0]} into bed FeelsOkayMan 👉 🛏 💤 `);
+        break;
+      case "untuck":
+        sendMsg(channel, `${user["display-name"]} untucks ${message.substr(8).split(' ')[0]} from their bed DansGame 👉 🛏 ❗  `);
+        break;
+    }
+  }
+  //handling regular messages
+  else {
+    if (message.startsWith("asd")) {
+      sendMsg("pajlada", "FeelsDankMan Clap ");
+    } else if (message.toLowerCase().includes("tolekkbot")) {
+      if (message.toLowerCase().includes("ty chuju")) {
+        sendMsg(channel, "Spierdalaj " + user["display-name"]);
+      }
+      else {
+        sendMsg(channel, "Pinged PepeS ");
+      }
+    } else if (message.includes("your mom")) {
+      sendMsg(channel, user["display-name"] + " forsenHead");
+    }
   }
 });
 
@@ -84,29 +107,6 @@ client.on("join", function(channel, user, username, self) {
   const snipers = require("./snipers.js");
   if (snipers.includes(username)) {
     sendMsg("smaczny", "NaM 👉 🚨 " + user["display-name"]);
-    {
-    }
-  }
-});
-
-//SMACZNY TEST, TUCK-UNTUCK MODULE
-client.on("chat", function(channel, user, message, self) {
-  if (message.startsWith(";tuck ")) {
-    sendMsg(
-      channel,
-      user["display-name"] +
-        " tucks " +
-        message.substr(6) +
-        " into bed FeelsOkayMan 👉 🛏 💤 "
-    );
-  } else if (message.startsWith(";untuck ")) {
-    sendMsg(
-      channel,
-      user["display-name"] +
-        " untucks " +
-        message.substr(7) +
-        " from their bed DansGame 👉 🛏 ❗  "
-    );
   }
 });
 
@@ -119,43 +119,42 @@ client.on("chat", function(channel, user, message, self) {
   }
 });
 
-// SUB REACTION MODULE
-client.on("subscription", function(channel, username) {
+// SUB REACTION MODULE (moved raffle things)
+client.on("subscription", function(channel, username, methods, message, userstate) {
   client.say(channel, "New sub PogChamp");
+  //raffle thing in #smaczny channel
+  if (channel !== "#smaczny") return;
+  if (username === client.username) return; //escapes own subs
+  sendMsg("smaczny", "!raffle 3500");
 });
 
 client.on(
   "subgift",
   (channel, username, streakMonths, recipient, methods, userstate) => {
     client.say(channel, "Gifters PogChamp ");
-  }
-);
+    //raffle thing in #smaczny channel
+    if (channel !== "#smaczny") return;
+    if (recipient === client.username) return; //escapes own subs
+    sendMsg("smaczny", "!raffle 3500");
+});
 
 client.on(
   "submysterygift",
   (channel, username, numbOfSubs, methods, userstate) => {
-    client.say(channel, "GIFTERS PogChamp ");
-  }
-);
+    client.say(channel, "ANON GIFTERS PogChamp ");
+    //raffle thing in #smaczny channel
+    if (channel !== "#smaczny") return;
+    // if (self) return; // no way to escape anon gifts
+    sendMsg("smaczny", "!raffle 3500");
+});
 
 client.on("resub", (channel, username, months, message, userstate, methods) => {
   client.say(channel, "RESUB PogChamp ");
-});
-
-client.on("subscription", function(channel, username, self) {
+  //raffle thing in #smaczny channel
   if (channel !== "#smaczny") return;
-  if (self) return;
-  sendMsg("smaczny", "!raffle 2500");
+  if (username === client.username) return; //escaping own subs
+  sendMsg("smaczny", "!raffle 2000");
 });
-
-client.on(
-  "subgift",
-  (self, channel, username, streakMonths, recipient, methods, userstate) => {
-    if (channel !== "#smaczny") return;
-    if (self) return;
-    sendMsg("smaczny", "!raffle 3500");
-  }
-);
 
 client.on(
   "submysterygift",
@@ -163,14 +162,5 @@ client.on(
     if (channel !== "#smaczny") return;
     if (self) return;
     sendMsg("smaczny", "!raffle 3500");
-  }
-);
-
-client.on(
-  "resub",
-  (self, channel, username, months, message, userstate, methods) => {
-    if (channel !== "#smaczny") return;
-    if (self) return;
-    sendMsg("smaczny", "!raffle 2000");
   }
 );
