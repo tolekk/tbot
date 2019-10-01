@@ -4,13 +4,13 @@
 // tmi.js lib required to run the bot
 // change the dir to whatever you want
 
-var tmi = require("./tmi/node_modules/tmi.js");
+const tmi = require("./tmi/node_modules/tmi.js");
 
 //bot config file with oauth and shit
 
 const config = require("./config.js");
 
-var client = new tmi.client(config.options);
+const client = new tmi.client(config.options);
 
 // Anti-repeated message module
 var lastMessage = null;
@@ -24,10 +24,10 @@ function sendMsg(channel, message) {
 
 client.connect();
 
-client.on("notice", function(channel, msgid, message) {});
+client.on("notice", (channel, msgid, message) => {});
 
 // MAIN COMMANDS MODULE
-client.on("chat", function(channel, user, message, self) {
+client.on("chat", (channel, user, message, self) => {
   //handling commands
   if (message.startsWith(";")) {
     // .split() function separates message content from any optional arguments and .slice(1) removes one character from the beginning of a message
@@ -103,14 +103,14 @@ client.on("chat", function(channel, user, message, self) {
 });
 
 // ANTI-SNIPER MODULE
-client.on("join", function(channel, user, username, self) {
+client.on("join", (channel, user, username, self) => {
   const snipers = require("./snipers.js");
   if (snipers.includes(username)) {
     sendMsg("smaczny", "NaM 👉 🚨 " + user["display-name"]);
   }
 });
 
-client.on("chat", function(channel, user, message, self) {
+client.on("chat", (channel, user, message, self) => {
   if (channel !== "#smaczny") return;
   if (self) return;
 
@@ -120,7 +120,7 @@ client.on("chat", function(channel, user, message, self) {
 });
 
 // SUB REACTION MODULE (moved raffle things)
-client.on("subscription", function(channel, username, methods, message, userstate) {
+client.on("subscription", (channel, username, methods, message, userstate) => {
   client.say(channel, "New sub PogChamp");
   //raffle thing in #smaczny channel
   if (channel !== "#smaczny") return;
