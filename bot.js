@@ -62,7 +62,7 @@ client.on("chat", function(channel, user, message, self) {
         sendMsg(channel, "Chat spam Kappa 123");
         break;
       case "test1":
-        sendMsg("pajlada", "FeelsDankMan woah ");
+        sendMsg(channel, "FeelsDankMan woah ");
         break;
       case "commands":
         sendMsg(channel, "Command list coming soon KKona");
@@ -88,7 +88,7 @@ client.on("chat", function(channel, user, message, self) {
   //handling regular messages
   else {
     if (message.startsWith("asd")) {
-      sendMsg("pajlada", "FeelsDankMan Clap ");
+      sendMsg(channel, "FeelsDankMan Clap ");
     } else if (message.toLowerCase().includes("tolekkbot")) {
       if (message.toLowerCase().includes("ty chuju")) {
         sendMsg(channel, "Spierdalaj " + user["display-name"]);
