@@ -26,8 +26,12 @@ client.on("connect", async () => {
     await client.say("tolekk", "tolekkBOT version " + botVer + " joined.");
 });
 
+let chat = "tolekk" + "elina"
 
-
+function randomNum(max) {
+    let min = 1
+    return Math.floor(Math.random() * (max - min) + min);
+}
 // COMMANDS
 
 client.on("PRIVMSG", async (msg) => {
@@ -48,14 +52,23 @@ client.on("PRIVMSG", async (msg) => {
 
         } else if (trunMsg[0] === "vanish") {
             try {
-                await client.timeout("tolekk", msg.displayName, 1, "vanish command usage");
+                await client.timeout("tolekk", msg.displayName.toLowerCase(), 1, "vanish command usage");
             } catch (error) {
             }
         } else if (trunMsg[0] === "pingmods") {
             if (checkMod) {
-            let mods = await client.getMods(trunMsg[1])
-            await client.say("tolekk", "Ping 🔔 " + mods);
+                let mods = await client.getMods(trunMsg[1])
+                await client.say("tolekk", "Ping 🔔 " + mods);
             }
+        } else if (trunMsg[0] === "random") {
+            if (trunMsg[1] <= 0 || trunMsg[1] >= 10001) {
+                await client.say("tolekk", "You must specify a number between 1 and 10000.");
+            } else {
+                let cfNum = await randomNum(trunMsg[1])
+                await client.say("tolekk", "Your random number is " + cfNum + ".");
+            }
+        } else if (["cf","coinflip"].includes(trunMsg[0])) {
+            await client.say("tolekk", "test");
         }
     }
 });
